@@ -1,0 +1,47 @@
+<div class="mb-4">
+  <div class="relative">
+    <input
+      type="text"
+      ng-model="searchText"
+      placeholder="Search..."
+      class="bg-gray-900 p-2 rounded-md"
+    />
+  </div>
+</div>
+<div class="bg-black w-[600px] p-2 rounded-md mt-4">
+  <a
+    ng-repeat="todo in todos | filter:searchText"
+    href="#/details/{{todo.id}}"
+    class="list-group-item list-group-item-action block mb-2 last:mb-0"
+  >
+    <div
+      class="bg-gray-900 p-2 border-solid border-1 border-grey-200 hover:bg-gray-800 transition-colors duration-200 rounded-md"
+    >
+      <div class="mb-2">{{todo.title}}</div>
+      <span
+        class="ext-sm"
+        ng-class="{
+          'bg-red-500 text-white p-1 rounded': todo.category === 'important',
+          'bg-blue-500 text-white p-1 rounded': todo.category === 'jobs',
+          'bg-gray-800 text-white p-1 rounded': todo.category === 'other',
+        }"
+      >
+        {{todo.category}}
+      </span>
+    </div>
+  </a>
+  <div
+    ng-if="(todos | filter:searchText).length === 0"
+    class="bg-black p-4 rounded-lg text-slate-600"
+  >
+    <i
+      >{{searchText ? 'No matching todos found.' : 'No todo lists created
+      yet.'}}</i
+    >
+  </div>
+</div>
+<div class="flex justify-end mt-6">
+  <a href="#/new-list" class="bg-green-400 px-2 py-1 rounded-md text-md"
+    >New List +</a
+  >
+</div>
